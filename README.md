@@ -23,7 +23,7 @@ module.exports = framework([
   }),
   // example middleware to cache db connection
   async context => {
-    // assumes `client.db` exists
+    // assumes `context.db` exists
     if (!context.db.client) {
       // use the `aws.secrets` service
       const url = await context.aws.secrets.getSecretValue('db-url')
