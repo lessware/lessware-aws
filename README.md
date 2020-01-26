@@ -23,16 +23,17 @@ module.exports = framework([
   }),
   // example middleware to cache db connection
   async context => {
-    if (!context.db) {
+    // assumes `client.db` exists
+    if (!context.db.client) {
       // use the `aws.secrets` service
       const url = await context.aws.secrets.getSecretValue('db-url')
-      context.db = await databaseConnection(url)
+      context.db.client = await databaseConnection(url)
     }
     return context
   },
   // example controller using cached database client
   async context => {
-    const doc = await context.db.getRecord(event.payload.id)
+    const doc = await context.db.client.getRecord(event.payload.id)
     return {
       statusCode: 200,
       body: JSON.stringify(doc),
