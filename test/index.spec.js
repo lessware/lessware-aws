@@ -31,7 +31,7 @@ const awsMethod = result => ({
 
 describe('aws', function() {
   describe('waitsForEmptyEventLoop', function() {
-    it('should honor defaults', async function() {
+    it('should have default toWait=false', async function() {
       const chain = framework([
         awsmid.waitsForEmptyEventLoop(),
       ])
