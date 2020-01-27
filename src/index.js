@@ -21,7 +21,7 @@ const defaultToWait = false
 exports.waitsForEmptyEventLoop = ({toWait=() => defaultToWait, contextKey='ctx'}={}) => async context => {
 	// per best practices, i.e.
 	// https://docs.atlas.mongodb.com/best-practices-connecting-to-aws-lambda/
-	context[contextKey].callbackWaitsForEmptyEventLoop = toWait()
+	context[contextKey].callbackWaitsForEmptyEventLoop = toWait(context)
 
   return context
 }
