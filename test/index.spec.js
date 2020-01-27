@@ -44,7 +44,7 @@ describe('aws', function() {
 
     it('should allow customizations', async function() {
       const chain = framework([
-        awsmid.waitsForEmptyEventLoop({toWait: true, contextKey: 'context'}),
+        awsmid.waitsForEmptyEventLoop({toWait: () => true, contextKey: 'context'}),
       ])
 
       const functionContext = {}
