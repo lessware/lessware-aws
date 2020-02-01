@@ -64,6 +64,9 @@ module.exports = framework([
 const todo = require('./todo')
 const router = {todo}
 
+// persist connections setup by middleware
+const db = {}
+
 exports.handler = async (event, ctx) => {
   const controller = router[event.fieldName]
 
