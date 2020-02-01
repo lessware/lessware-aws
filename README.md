@@ -37,6 +37,7 @@ module.exports = framework([
     serviceName: 'secrets',
     serviceClass: 'SecretsManager'
   }),
+
   // example middleware to cache db connection
   async context => {
     // assumes `context.db` exists
@@ -47,6 +48,7 @@ module.exports = framework([
     }
     return context
   },
+
   // example controller using cached database client
   async context => {
     const doc = await context.db.client.getRecord("todos", event.payload.id)
