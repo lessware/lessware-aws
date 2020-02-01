@@ -49,7 +49,7 @@ module.exports = framework([
   },
   // example controller using cached database client
   async context => {
-    const doc = await context.db.client.getRecord(event.payload.id)
+    const doc = await context.db.client.getRecord("todos", event.payload.id)
     return {
       statusCode: 200,
       body: JSON.stringify(doc),
