@@ -5,7 +5,7 @@ aws middleware for lessware framework
 `npm i -S lessware-aws`
 
 ## API
-`waitsForEmptyEventLoop` - a function that returns the middlware function which mutates a Lambda function's `callbackWaitsForEmptyEventLoop` property.
+`waitsForEmptyEventLoop` - a function that returns the middleware function which mutates a Lambda function's `callbackWaitsForEmptyEventLoop` property.
 - input parameter: an object whose keys determine behavior,
   - `toWait` - a function whose input is the `context` from the middleware and returns a boolean (default `false`) used to tell Lambda if it should wait for all asynchronous activity to resolve 
   - `contextKey` - the key (default `"ctx"`) storing a Lambda Function's 2nd parameter often called "context"
@@ -17,7 +17,7 @@ aws middleware for lessware framework
   - `serviceClass`: a string that identifies the service class in the `AWS` SDK to use, e.g. `SecretsManager`
 
 ## Example Usage
-An API Controller using `waitsForEmptyEventLoop`, `service` middlware.
+An API Controller using `waitsForEmptyEventLoop`, `service` middleware.
 
 ```javascript
 -- todo.js --
