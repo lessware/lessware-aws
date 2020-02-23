@@ -46,8 +46,9 @@ module.exports = framework([
 
 When buidling releases,
 1. `npm test`
-2. `git commit -m "your message"`
-3. bump version 
+2. `git checkout -b feature-branch`
+3. `git commit -m "your message"`
+4. bump version 
    1. `npm version patch`
    2. `npm version minor`
-4. `npm publish`
+5. `npm publish`

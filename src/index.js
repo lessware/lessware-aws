@@ -3,14 +3,30 @@ const { drillDown } = require('deepdown')
 
 const defaultConfigPath = ['config', 'aws']
 
-exports.service = ({serviceName='secrets', serviceClass='SecretsManager', configPath=defaultConfigPath}) => async (context) => {
+const defaultConfig = async ctx => drillDown(ctx, defaultConfigPath)
+
+const defaultStore = (context, {serviceName, /*serviceClass*/}, service) => {
   if (!context.aws) {
     context.aws = {}
   }
 
-  if (!context.aws[serviceName]) {
+  context.aws[serviceName] = service
+}
+
+const defaultStoreCache = (context, {serviceName, /*serviceClass*/}) => drillDown(context, ['aws', serviceName])
+
+exports.service = ({
+  serviceName='secrets',
+  serviceClass='SecretsManager',
+  config=defaultConfig,
+  store={write: defaultStore, read: defaultStoreCache},
+}) => async (context) => {
+
+  const service = {serviceName, serviceClass}
+  if (!store.read(context, service)) {
+    const cfg = await config(context)
     const ctor = AWS[serviceClass]
-    context.aws[serviceName] = new ctor(drillDown(context, configPath))
+    store.write(context, service, new ctor(cfg))
   }
 
   return context
