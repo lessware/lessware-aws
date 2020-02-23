@@ -44,7 +44,7 @@ module.exports = framework([
     if (!context.db.client) {
       // use the `aws.secrets` service
       const url = await context.aws.secrets.getSecretValue('db-url')
-      context.db.client = await databaseConnection(url)
+      context.db.client = await databaseConnection(JSON.parse(url.SecretString))
     }
     return context
   },

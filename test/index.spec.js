@@ -57,10 +57,10 @@ describe('aws', function() {
   describe('service', function() {
     const tests = [
       {serviceName: 'secrets', serviceClass: 'SecretsManager', methodTests: [
-        {methodName: 'getSecretValue', should: 'should work', mockResult: {data: 'foo',}, methodParams: {SecretId: testConfig.secretName}},
+        {methodName: 'getSecretValue', should: 'should work', mockResult: {SecretString: JSON.stringify({url: "mongodb://<user>:<pass>@<clusterNode>:<port>,<clusterNode>:<port>"}),}, methodParams: {SecretId: testConfig.secretName}},
       ]},
       {serviceName: 'ssm', serviceClass: 'SSM', methodTests: [
-        {methodName: 'getParameter', should: 'should work', mockResult: {data: 'foo'}, methodParams: {Name: testConfig.paramName}},
+        {methodName: 'getParameter', should: 'should work', mockResult: {Parameter: {Value: 'foo', Name: 'foo'}}, methodParams: {Name: testConfig.paramName}},
       ]},
     ]
 
