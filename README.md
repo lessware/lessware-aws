@@ -71,7 +71,7 @@ exports.handler = async (event, ctx) => {
   const controller = router[event.fieldName]
 
   // invoke the controller that takes one object for framework "context"
-  return controller({event, ctx})
+  return controller({event, ctx, db})
 }
 ```
 
